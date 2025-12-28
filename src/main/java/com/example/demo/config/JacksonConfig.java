@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import java.util.TimeZone;
+
 /**
  * Jackson configuration for proper date/time serialization.
  * Ensures LocalDateTime is serialized as ISO-8601 strings instead of arrays.
@@ -24,6 +26,9 @@ public class JacksonConfig {
         
         // Serialize dates as ISO-8601 strings instead of timestamps or arrays
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        
+        // Set timezone to UTC to ensure consistent timestamp handling
+        mapper.setTimeZone(TimeZone.getTimeZone("UTC"));
         
         return mapper;
     }

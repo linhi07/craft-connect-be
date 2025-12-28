@@ -5,6 +5,12 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  
+  # Jackson JSON Configuration
+  jackson:
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
 
   # Database Configuration
   datasource:
