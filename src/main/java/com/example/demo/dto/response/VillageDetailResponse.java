@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class VillageDetailResponse {
-    
+
     private Integer villageId;
     private String villageName;
     private String contactPerson;
@@ -24,10 +24,22 @@ public class VillageDetailResponse {
     private String inspirationalStory;
     private String certifications;
     private String location;
+
+    // New fields for village detail page
+    private String profileImageUrl;
+    private String email;
+    private String craftType;
+    private String associationMembership;
+    private String keyProducts;
+    private String techniques;
+    private String productionCapacity;
+    private String estimatedCompletionTime;
+
+    private Double rating;
     private Scale scale;
     private Region region;
-    private Set<ProductCategory> categories;
-    private Set<ProductCharacteristic> characteristics;
-    private Set<MarketSegment> marketSegments;
+    private ProductCategory[] categories;
+    private ProductCharacteristic[] characteristics;
+    private MarketSegment[] marketSegments;
     private List<PortfolioItemResponse> portfolioItems;
 }

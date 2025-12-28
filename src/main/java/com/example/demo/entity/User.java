@@ -4,7 +4,9 @@ import com.example.demo.enums.UserType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
@@ -27,8 +29,8 @@ public class User {
     @Column(name = "password_hash", nullable = false, length = 255)
     private String passwordHash;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type", nullable = false, length = 50)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "user_type", nullable = false)
     private UserType userType;
 
     @CreationTimestamp

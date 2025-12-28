@@ -25,24 +25,36 @@ public class VillageController {
      * GET /api/villages
      * GET /api/villages?scale=VILLAGE&region=NORTHERN_VIETNAM
      * GET /api/villages?categories=RAW_MATERIALS,FASHION_TEXTILE
-     * GET /api/villages?characteristics=HANDWOVEN,ECO_FRIENDLY&marketSegments=LUXURY
+     * GET
+     * /api/villages?characteristics=HANDWOVEN,ECO_FRIENDLY&marketSegments=LUXURY
      */
     @GetMapping
     public ResponseEntity<VillageSearchResponse> searchVillages(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) Integer materialId,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) Double minRating,
             @RequestParam(required = false) Scale scale,
             @RequestParam(required = false) Region region,
             @RequestParam(required = false) Set<ProductCategory> categories,
             @RequestParam(required = false) Set<ProductCharacteristic> characteristics,
             @RequestParam(required = false) Set<MarketSegment> marketSegments,
+            @RequestParam(defaultValue = "rating") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortOrder,
             @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "10") Integer size
-    ) {
+            @RequestParam(defaultValue = "10") Integer size) {
         VillageSearchRequest request = new VillageSearchRequest();
+        request.setQuery(query);
+        request.setMaterialId(materialId);
+        request.setLocation(location);
+        request.setMinRating(minRating);
         request.setScale(scale);
         request.setRegion(region);
         request.setCategories(categories);
         request.setCharacteristics(characteristics);
         request.setMarketSegments(marketSegments);
+        request.setSortBy(sortBy);
+        request.setSortOrder(sortOrder);
         request.setPage(page);
         request.setSize(size);
 
