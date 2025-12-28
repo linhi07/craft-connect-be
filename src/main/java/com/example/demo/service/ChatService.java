@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -116,7 +117,7 @@ public class ChatService {
         log.debug("Saved message - ID: {}, CreatedAt: {}", message.getMessageId(), message.getCreatedAt());
 
         // Update room's updated_at timestamp
-        room.setUpdatedAt(LocalDateTime.now());
+        room.setUpdatedAt(LocalDateTime.now(ZoneOffset.UTC));
         chatRoomRepository.save(room);
 
         ChatMessageResponse response = mapToMessageResponse(message, currentUserId);
@@ -176,7 +177,7 @@ public class ChatService {
                     .build();
         }
 
-        receipt.setLastReadAt(LocalDateTime.now());
+        receipt.setLastReadAt(LocalDateTime.now(ZoneOffset.UTC));
         chatReadReceiptRepository.save(receipt);
     }
 
@@ -270,7 +271,7 @@ public class ChatService {
         // Fallback if createdAt is null (shouldn't happen but just in case)
         if (createdAt == null) {
             log.warn("Message {} has null createdAt, using current time", message.getMessageId());
-            createdAt = LocalDateTime.now();
+            createdAt = LocalDateTime.now(ZoneOffset.UTC);
         }
         
         return ChatMessageResponse.builder()
